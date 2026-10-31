@@ -19,8 +19,8 @@ COPY . /var/www/html/
 
 RUN echo '<VirtualHost *:80>\n\
     ServerAdmin webmaster@localhost\n\
-    DocumentRoot /var/www/html/frontend\n\
-    <Directory /var/www/html/frontend>\n\
+    DocumentRoot /var/www/html\n\
+    <Directory /var/www/html>\n\
         Options Indexes FollowSymLinks\n\
         AllowOverride All\n\
         Require all granted\n\

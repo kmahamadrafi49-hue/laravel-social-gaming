@@ -12,11 +12,14 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
-# Copy project files directly to Apache default root
 COPY . /var/www/html/
 
-# Update Apache configuration to allow proper permissions for /var/www/html
-RUN echo '<Directory /var/www/html/>\n\
+# అపాచీ రూట్ పాత్‌ను public ఫోల్డర్‌కు మార్చడానికి ఇది ఉపయోగపడుతుంది
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+RUN echo '<Directory /var/www/html/public/>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\

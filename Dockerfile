@@ -15,7 +15,13 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 COPY . /var/www/html/
+
+# Run composer install to generate vendor folder inside casino
+RUN cd /var/www/html/casino && composer install --no-dev --optimize-autoloader || true
 
 RUN echo '<VirtualHost *:80>\n\
     ServerAdmin webmaster@localhost\n\

@@ -14,12 +14,11 @@ RUN a2enmod rewrite
 
 COPY . /var/www/html/
 
-# అపాచీ డాక్యుమెంట్ రూట్ పాత్‌ను సరిగ్గా public/frontend/Default ఫోల్డర్‌కు సెట్ చేయడం
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public/frontend/Default
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-RUN echo '<Directory /var/www/html/public/frontend/Default/>\n\
+RUN echo '<Directory /var/www/html/public/>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\

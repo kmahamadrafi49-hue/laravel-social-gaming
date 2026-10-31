@@ -16,7 +16,7 @@ RUN a2enmod rewrite
 
 COPY . /var/www/html/
 
-# అపాచీ డాక్యుమెంట్ రూట్‌ను public ఫోల్డర్‌కు మార్చడం (ఇక్కడే install.php మరియు index.php ఉంటాయి)
+# అపాచీ డాక్యుమెంట్ రూట్‌ను నేరుగా public ఫోల్డర్‌కు సెట్ చేయడం
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf

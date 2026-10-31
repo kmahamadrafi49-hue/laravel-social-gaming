@@ -14,11 +14,7 @@ RUN a2enmod rewrite
 
 COPY . /var/www/html/
 
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-RUN echo '<Directory /var/www/html/public/>\n\
+RUN echo '<Directory /var/www/html/>\n\
     Options Indexes FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\

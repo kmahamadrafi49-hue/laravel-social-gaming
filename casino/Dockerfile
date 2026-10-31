@@ -1,6 +1,5 @@
 FROM php:8.2-apache
 
-# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -11,18 +10,14 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
-# Enable Apache mod_rewrite for clean URLs
 RUN a2enmod rewrite
 
-# Copy project files to Apache server directory
 COPY . /var/www/html/
 
-# Set working directory
+# Set Apache document root to the casino folder where your index.php is located
+ENV APACHE_DOCUMENT_ROOT /var/www/html/casino
+RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 WORKDIR /var/www/html/
-
-# Set permissions for Apache
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
-
-# Expose port 80 (Render uses port 80 by default for web services)
 EXPOSE 80

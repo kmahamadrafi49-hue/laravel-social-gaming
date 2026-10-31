@@ -15,9 +15,10 @@ RUN a2enmod rewrite
 COPY . /var/www/html/
 
 RUN echo '<Directory /var/www/html/>\n\
-    Options Indexes FollowSymLinks\n\
+    Options -Indexes +FollowSymLinks\n\
     AllowOverride All\n\
     Require all granted\n\
+    DirectoryIndex install.php index.php\n\
 </Directory>' >> /etc/apache2/apache2.conf
 
 WORKDIR /var/www/html/

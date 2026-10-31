@@ -12,12 +12,15 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
+# Copy project files directly to Apache default root
 COPY . /var/www/html/
 
-# Set Apache document root to the casino folder where your index.php is located
-ENV APACHE_DOCUMENT_ROOT /var/www/html/casino
-RUN sed -ri -s 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -s 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Update Apache configuration to allow proper permissions for /var/www/html
+RUN echo '<Directory /var/www/html/>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>' >> /etc/apache2/apache2.conf
 
 WORKDIR /var/www/html/
 EXPOSE 80

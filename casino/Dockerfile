@@ -17,11 +17,10 @@ RUN a2enmod rewrite
 
 COPY . /var/www/html/
 
-# నేరుగా అపాచీ కాన్ఫిగరేషన్ మార్చి డాక్యుమెంట్ రూట్‌ను public ఫోల్డర్‌కు సెట్ చేయడం
 RUN echo '<VirtualHost *:80>\n\
     ServerAdmin webmaster@localhost\n\
-    DocumentRoot /var/www/html/public\n\
-    <Directory /var/www/html/public>\n\
+    DocumentRoot /var/www/html/frontend\n\
+    <Directory /var/www/html/frontend>\n\
         Options Indexes FollowSymLinks\n\
         AllowOverride All\n\
         Require all granted\n\

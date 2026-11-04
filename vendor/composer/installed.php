@@ -3,7 +3,7 @@
         'name' => 'loshmis/vanguard',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '32d920a4f5ee0e29798cee6619e55a05b8826ab0',
+        'reference' => 'f6b7dc1a0d8434edd7fdfabfa5e0845278ac2b77',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -649,7 +649,7 @@
         'loshmis/vanguard' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '32d920a4f5ee0e29798cee6619e55a05b8826ab0',
+            'reference' => 'f6b7dc1a0d8434edd7fdfabfa5e0845278ac2b77',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
